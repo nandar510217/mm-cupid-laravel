@@ -11,7 +11,7 @@
           height: 40px;
         }        
         table {
-          width: 50%;
+          width: 80%;
           border-collapse: collapse;
         }
         input[type=text], select {
@@ -46,18 +46,27 @@
     </style>  
 </head>
 <body>   
-    <h2>Cities</h2>   
-    
+    <h2>Cities</h2>     
     <table>
         <tr style="background-color: rgb(132, 210, 210)">
-            <th style="width:20%">ID</th>
-            <th style="width:50%">Name</th>
-            <th style="width:50%">Action</th>
+            <th style="width:10%">ID</th>
+            <th style="width:30%">Name</th>
+            <th style="width:40%">Members</th>
+            <th style="width:20%">Action</th>
         </tr>
         @foreach ($cities as $city)
             <tr style="background-color: rgb(249, 250, 252)">
                 <td>{{$city->id}}</td>
                 <td>{{$city->name}}</td>
+                {{-- <td>{{dd($city->getMemberByCity)}}</td> --}}
+                <td>
+                    @if($city->getMemberByCity() != null)
+                    {{ getMembersNameByCity($city->getMemberByCity)}}
+                        {{-- @foreach($city->getMemberByCity as $member) 
+                            {{ $member->username}},
+                        @endforeach --}}
+                    @endif
+                </td>
                 <td>
                     <a href="{{url('test/city/edit/' . $city->id)}}">Edit</a>
                     <a href="{{url('test/city/delete/' . $city->id)}}">Delete</a>
@@ -66,6 +75,29 @@
         @endforeach       
     </table>
     <br>
+
+    <table>
+        <h2>Members</h2>  
+        <tr style="background-color: rgb(132, 210, 210)">
+            <th style="width:10%">ID</th>
+            <th style="width:30%">Name</th>
+            <th style="width:40%">Members</th>
+        </tr>
+        @foreach ($members as $member)
+            <tr style="background-color: rgb(249, 250, 252)">
+                <td>{{$member->id}}</td>
+                <td>{{$member->username}}</td>
+                <td>
+                    {{-- {{dd($member->getCityByMember->name)}} --}}
+                    @if($member->getCityByMember() != null)
+                        {{ $member->getCityByMember->name }}
+                    @endif
+                </td>
+            </tr> 
+        @endforeach       
+    </table>
+    <br>
+    
     <div style="width:500px;margin:0 auto;">
         @if(isset($edit_city))
             <form action="{{ route('post.form.update')}}" method="POST">

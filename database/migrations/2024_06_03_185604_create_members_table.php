@@ -31,14 +31,12 @@ return new class () extends Migration {
             $table->unsignedTinyInteger('partner_gender');
             $table->unsignedInteger('partner_min_age');
             $table->unsignedInteger('partner_max_age');
-            $table->dateTime('last_login');
+            $table->dateTime('last_login')->nullable();
             $table->unsignedInteger('point');
-            $table->unsignedInteger('view_count');
-            $table->string('thumb_nail', 200);
-            $table->longText('verify_image');
+            $table->unsignedInteger('view_count')->nullable();
+            $table->string('thumb_nail', 200)->nullable();
+            $table->longText('verify_image')->nullable();
             $table->tinyInteger('religion');
-            $table->unsignedInteger('created_by');
-            $table->unsignedInteger('updated_by');
             $table->unsignedInteger('deleted_by')->nullable();
             $table->timestamps();
             $table->softDeletes();

@@ -415,7 +415,7 @@ input[type="checkbox"]:checked ~ .checkbox {
     <h1 id="litheader">Login</h1>
     <div class="inset">
       <p>
-        <input type="text" name="username" placeholder="Username">
+        <input type="text" name="username" placeholder="Username" value="{{ old('username')}}">
         @if ($errors->has('username'))
             <span style="color:red">{{ $errors->first('username')}}</span>
         @endif

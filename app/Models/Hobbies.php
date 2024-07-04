@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Hobbies extends Model
 {
@@ -19,4 +20,13 @@ class Hobbies extends Model
         'updated_at',
         'updated_by',
     ];
+
+    public function getMemberHobbiesByHobby(): HasMany
+    {
+        return $this->hasMany(
+            MemberHobbies::class,
+            'hobby_id',
+            'id'
+        );
+    }
 }

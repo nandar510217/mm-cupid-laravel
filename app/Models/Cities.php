@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Cities extends Model
 {
@@ -19,4 +20,9 @@ class Cities extends Model
         'updated_at',
         'updated_by',
     ];
+
+    public function getMemberByCity(): HasMany
+    {
+        return $this->hasMany(Members::class, 'city_id', 'id');
+    }
 }

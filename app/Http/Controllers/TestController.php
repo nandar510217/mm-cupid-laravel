@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Cities;
 use App\Http\Requests\CityStoreRequest;
 use App\Http\Requests\CityUpdateRequest;
+use App\Models\Members;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TestController extends Controller
 {
@@ -15,9 +17,12 @@ class TestController extends Controller
                     ->orderBy('id', 'ASC')
                     ->whereNull('deleted_at')
                     ->get();
+        $members = Members::SELECT("id", "username", "city_id")
+                    ->get();
         // return "Index page.";
         return view('test.index', compact([
             'cities',
+            'members',
         ]));
     }
     public function postFormStore(CityStoreRequest $request)
@@ -63,7 +68,6 @@ class TestController extends Controller
         $update->updated_by = 1;
         $update->save();
         return redirect('test');
-
     }
 
     public function delete($id)

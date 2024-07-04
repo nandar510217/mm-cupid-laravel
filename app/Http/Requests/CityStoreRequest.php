@@ -25,7 +25,7 @@ class CityStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'city' => [
+            'name' => [
                 'required',
                 Rule::unique('cities', 'name')->where(function ($query) {
                     return $query
@@ -37,8 +37,8 @@ class CityStoreRequest extends FormRequest
     public function messages()
     {
         return [
-            'city.required' => 'Please fill city name.',
-            'city.unique' => 'The city name you enter is already exit.',
+            'name.required' => 'Please fill city name.',
+            'name.unique' => 'The city name you enter is already exit.',
         ];
     }
 }
