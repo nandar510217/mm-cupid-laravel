@@ -33,7 +33,7 @@ class RegistrationConfirmMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Registration Confirm Mail',
+            subject: 'Myanmar Cupid - Complete your registration',
         );
     }
 

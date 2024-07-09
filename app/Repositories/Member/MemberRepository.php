@@ -69,6 +69,7 @@ class MemberRepository implements MemberRepositoryInterface
     }
 
     public function uploadMemberGallery(array $data) {
+        $returnArray = array();
         for($i= 1;$i <= 6 ;$i++){
             if(isset($data['upload' . $i]) && $data['upload' . $i]->isValid()){
                 $file = $data['upload' . $i];
@@ -86,9 +87,17 @@ class MemberRepository implements MemberRepositoryInterface
                 $ins_data['created_by'] = $data['member-id'];
                 $ins_data['updated_by'] = $data['member-id'];
                 MembersGallery::create($ins_data);
-                
+                // if($i == 1){        
+                // }
             }
         }
+        $returnArray['status'] = ReturnMessage::OK;
+        return $returnArray;
+    }
+
+        public function getMemberById(int $id){
+        $member = Members::find($id);
+        return $member;
     }
 
     protected static function generateEmailConfirmCode() 
@@ -99,6 +108,13 @@ class MemberRepository implements MemberRepositoryInterface
         $md5_hash = md5($data_to_hash);
         return $md5_hash;
     }
+
+    public function getUserinfoByEmail(string $email){
+        $member = Members::where('email', '=', $email)
+                    ->first();
+        return $member;
+    }
+
 
 
 

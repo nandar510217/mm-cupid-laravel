@@ -47,6 +47,8 @@ Route::post('/admin-backend/login', [AuthController::class, 'postAdminLogin'])->
 Route::get('/test', [MailController::class, 'index']);
 Route::get('/register', [MemberController::class, 'register']);
 Route::post('/register', [MemberController::class, 'postRegister'])->name('register');
+Route::get('/login', [MemberController::class, 'login']);
+Route::post('/login', [MemberController::class, 'postLogin'])->name('login');
 Route::post('/api/register', [MemberController::class, 'apiRegister']);
 Route::get('/api/cities', [MemberController::class, 'apiGetCities']);
 Route::get('/api/hobbies', [MemberController::class, 'apiGetHobbies']);
